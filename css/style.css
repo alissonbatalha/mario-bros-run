@@ -19,6 +19,10 @@
   background: linear-gradient(#87ceeb, #e8f6ff);
 }
 
+.botao {
+	display: none;
+}
+
 .pipe {
   position: absolute;
 
@@ -26,7 +30,7 @@
 
   bottom: 0;
 
-  animation: pipe-animation 1.5s infinite linear;
+  animation: pipe-animation 1.5s infinite 1s linear;
 }
 
 .mario {
@@ -49,6 +53,18 @@
   animation: clouds-animation 12s infinite linear;
 }
 
+.placar {
+	right: 0;
+	top: 0;
+	
+	position: absolute;
+	
+	margin: 15px 20px 0 0;
+	
+	font-weight: bold;
+	font-size: 2em;
+}
+
 @keyframes pipe-animation {
   from {
     right: -80px;
@@ -65,15 +81,15 @@
   }
 
   40% {
-   bottom: 180px;
+   bottom: 90px;
   }
 
   50% {
-    bottom: 180px;
+    bottom: 90px;
   }
 
   60% {
-    bottom: 180px;
+    bottom: 90px;
   }
 
   100% {
@@ -83,10 +99,60 @@
 
 @keyframes clouds-animation {
   from {
-    right: -550px;
+    right: -275px;
   }
 
   to {
     right: 100%;
   }
+}
+
+@media screen and (max-width: 500px) {
+	.pipe {
+		width: 30px;
+	}
+	
+	.mario {
+		width: 75px;
+	}
+	
+	.clouds {
+		width: 275px;
+		
+		top: 100px;
+	}
+	
+	.botao {
+		display: block;
+		
+		position: absolute;
+		
+		right: 0;
+		bottom: 0;
+		
+		margin: 0 30px 30px 0;
+		
+		width: 80px;
+		height: 80px;
+		
+		padding: 1em;
+		
+		border-radius: 50%;
+		
+		background-color: #377aca7f;
+		
+		color: #000;
+		
+		text-transform: uppercase;
+		text-align: center;
+		
+		font-weight: bold;
+		
+	}
+	
+	botao:hover {
+		background-color: #1f5aa0;
+		
+		box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+	}
 }
