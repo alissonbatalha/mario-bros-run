@@ -1,24 +1,35 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./css/style.css">
-  <title>Mario Bros </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Mario Bros Run</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./script.js" defer></script> 
 </head>
 <body>
-  <div class="game-board">
-  	
-  	<span class="placar">0</span>
-  	
-  	<button class="botao" type="submit" onclick="jump()">pular</button>
-    <img src="./images/clouds.png" alt="imagens das nuvens" class="clouds">
 
-    <img src="./images/pipe.png" alt="obstaculos do game"  class="pipe">
+    <div class="game-board">
+        <div class="score-container">
+            <div class="score-box">Score: <span id="current-score">0</span></div>
+            <div class="score-box">Recorde: <span id="high-score">0</span></div>
+        </div>
 
-    <img src="./images/mario.gif" alt="personagem do jogo" class="mario">
+        <img src="./images/pipe.png" class="pipe" alt="Cano">
+        <img src="./images/mario.gif" class="mario" alt="Mario">
+        <img src="./images/clouds.png" class="clouds" alt="Nuvens">
 
-  </div> <!-- game board -->
-  <script src="script.js" type="text/javascript" charset="utf-8"></script>
+        <div class="game-over-screen">
+            <h1>GAME OVER</h1>
+            <div class="final-score-board">
+                <p>Pontuação Final: <span id="final-score">0</span></p>
+                <p>Melhor Pontuação: <span id="final-high-score">0</span></p>
+            </div>
+            <button class="btn-restart" onclick="window.location.reload()">Jogar Novamente</button>
+        </div>
+
+        <button class="mobile-jump-btn" aria-label="Pular">PULAR</button>
+    </div>
+
 </body>
 </html>

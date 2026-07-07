@@ -4,94 +4,131 @@
   box-sizing: border-box;
 }
 
-.game-board {
-  width: 100%;
-  height: 500px;
-
-  position: relative;
-
+body {
+  background: #222;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   overflow: hidden;
-
-  margin: 0 auto;
-
-  border-bottom: 15px solid rgb(35, 160, 35);
-
-  background: linear-gradient(#87ceeb, #e8f6ff);
+  font-family: Arial, sans-serif;
 }
 
-.botao {
-	display: none;
+.game-board {
+  width: 100%;
+  max-width: 600px;
+  height: 500px;
+  border-bottom: 15px solid #4ca146;
+  background: linear-gradient(#87CEEB, #E0F6FF);
+  position: relative;
+  overflow: hidden;
 }
 
 .pipe {
   position: absolute;
-
-  width: 80px;
-
   bottom: 0;
-
-  animation: pipe-animation 1.5s infinite 1s linear;
+  width: 80px;
+  right: -80px;
+  animation: pipe-animation 1.5s infinite linear;
 }
 
 .mario {
   width: 150px;
-  
   position: absolute;
-
   bottom: 0;
 }
 
 .jump {
-  animation: mario-jump 500ms ease-out;
+  animation: jump-animation 500ms ease-out;
 }
 
 .clouds {
-  width: 550px;
-
   position: absolute;
-
-  animation: clouds-animation 12s infinite linear;
+  width: 250px;
+  /* Reduzido de 500px para ocupar menos espaço */
+  top: 30px;
+  /* Mantém as nuvens altas, bem longe do chão */
+  animation: clouds-animation 20s infinite linear;
+  z-index: 1;
+  /* Garante que fiquem no fundo */
 }
 
-.placar {
-	right: 0;
-	top: 0;
-	
-	position: absolute;
-	
-	margin: 15px 20px 0 0;
-	
-	font-weight: bold;
-	font-size: 2em;
+/* Tela de Fim de Jogo */
+.game-over-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
 }
 
+.game-over-screen.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.game-over-screen h1 {
+  color: #ff0000;
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.btn-restart {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  background: #f1c40f;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+/* Botão de Pulo Mobile (Escondido no Desktop) */
+.mobile-jump-btn {
+  display: none;
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 4px solid #333;
+  border-radius: 50%;
+  font-weight: bold;
+  color: #333;
+  outline: none;
+  z-index: 10;
+  user-select: none;
+}
+
+/* Animações nativas */
 @keyframes pipe-animation {
   from {
     right: -80px;
   }
-
   to {
     right: 100%;
   }
 }
 
-@keyframes mario-jump {
+@keyframes jump-animation {
   0% {
     bottom: 0;
   }
-
   40% {
-   bottom: 90px;
+    bottom: 180px;
   }
-
   50% {
-    bottom: 90px;
+    bottom: 180px;
   }
-
-  60% {
-    bottom: 90px;
-  }
-
   100% {
     bottom: 0;
   }
@@ -99,60 +136,82 @@
 
 @keyframes clouds-animation {
   from {
-    right: -275px;
+    right: -500px;
   }
-
   to {
     right: 100%;
   }
 }
 
-@media screen and (max-width: 500px) {
-	.pipe {
-		width: 30px;
-	}
-	
-	.mario {
-		width: 75px;
-	}
-	
-	.clouds {
-		width: 275px;
-		
-		top: 100px;
-	}
-	
-	.botao {
-		display: block;
-		
-		position: absolute;
-		
-		right: 0;
-		bottom: 0;
-		
-		margin: 0 30px 30px 0;
-		
-		width: 80px;
-		height: 80px;
-		
-		padding: 1em;
-		
-		border-radius: 50%;
-		
-		background-color: #377aca7f;
-		
-		color: #000;
-		
-		text-transform: uppercase;
-		text-align: center;
-		
-		font-weight: bold;
-		
-	}
-	
-	botao:hover {
-		background-color: #1f5aa0;
-		
-		box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-	}
+/* Container do Placar Superior */
+.score-container {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 10;
+}
+
+.score-box {
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* Painel de pontuação dentro do Game Over */
+.final-score-board {
+  color: #fff;
+  font-size: 1.4rem;
+  margin-bottom: 25px;
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+  line-height: 1.8;
+}
+
+.final-score-board span {
+  color: #f1c40f;
+  font-weight: bold;
+}
+
+/* 📱 Responsividade de Adaptação Mobile */
+@media screen and (max-width: 768px) {
+  .game-board {
+    height: 100vh;
+    border-bottom: 30px solid #4ca146;
+  }
+  .mario {
+    width: 100px;
+  }
+  .pipe {
+    width: 55px;
+  }
+  .clouds {
+    width: 180px;
+    /* Nuvens ainda menores em telas de celular */
+    top: 20px;
+  }
+  .mobile-jump-btn {
+    display: block;
+    /* O botão SÓ aparece se for tela touch/mobile */
+  }
+  @keyframes jump-animation {
+    0% {
+      bottom: 0;
+    }
+    40% {
+      bottom: 140px;
+    }
+    50% {
+      bottom: 140px;
+    }
+    100% {
+      bottom: 0;
+    }
+  }
 }
