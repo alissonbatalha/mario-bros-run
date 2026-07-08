@@ -182,7 +182,7 @@ body {
 /* 📱 Responsividade de Adaptação Mobile */
 @media screen and (max-width: 768px) {
   .game-board {
-    height: 100vh;
+    height: 90vh;
     border-bottom: 30px solid #4ca146;
   }
   .mario {
