@@ -1,0 +1,7 @@
+{
+  "name": "mario-bros-run",
+  "version": "1.0.0",
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
